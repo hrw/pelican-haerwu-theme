@@ -1,0 +1,18 @@
+{% if DEFAULT_PAGINATION %}
+<section id="paginator">
+
+        <section id="page-newer">
+    {% if articles_page.has_previous() %}
+        <a href="{{ SITEURL }}/{{ articles_previous_page.url }}">&laquo; Newer posts</a>
+    {% endif %}
+        </section>
+        <section id="page-number">
+    Page {{ articles_page.number }} / {{ articles_paginator.num_pages }}
+        </section>
+        <section id="page-older">
+    {% if articles_page.has_next() %}
+        <a href="{{ SITEURL }}/{{ articles_next_page.url }}">Older posts &raquo;</a>
+    {% endif %}
+        </section>
+</section>
+{% endif %}

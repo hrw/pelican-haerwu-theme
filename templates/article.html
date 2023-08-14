@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block html_lang %}{{ article.lang }}{% endblock %}
+
+{% block title %}{{ article.title|striptags }} &ndash; {{ SITENAME }}{% endblock %}
+
+{% block head %}
+  {{ super() }}
+
+  {% if article.description %}
+    <meta name="description" content="{{article.description|striptags}}" />
+  {% elif article.summary %}
+    <meta name="description" content="{{article.summary|striptags}}" />
+  {% endif %}
+
+  {% for tag in article.tags|sort %}
+    <meta name="tags" content="{{tag}}" />
+  {% endfor %}
+
+{% endblock %}
+
+{% block content %}
+<main id="content"  data-pagefind-body >
+	<header>
+		<h2 class="entry-title" data-pagefind-meta="title" >
+			<a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a>
+		</h2>
+	</header>
+	<div class="entry-content">
+{% if article.series %}
+    <p>This post is part {{ article.series.index }} of the "{{ article.series.name }}" series:</p>
+    <ol id="series_parts">
+        {% for part_article in article.series.all %}
+            <li {% if part_article == article %}class="active"{% endif %}>
+                <a href='{{ SITEURL }}/{{ part_article.url }}'>{{ part_article.title }}</a>
+            </li>
+        {% endfor %}
+    </ol>
+{% endif %}
+		{{ article.content }}
+	</div>
+	<footer class="post-info">
+		Written by {{ article.author }} on 
+		<time class="published" datetime="{{ article.date.isoformat() }}" data-pagefind-sort="date">
+			{%- set d = article.date | strftime("%-d") %}
+			{% if d in ["1", "21", "31"] %}
+				{{ d }}st
+			{% elif d in ["2", "22"] %}
+				{{ d }}nd
+			{% elif d in ["3", "23"] %}
+				{{ d }}rd
+			{% else %}
+				{{ d }}th
+			{% endif -%}
+			{{ article.date|strftime("%B %Y") }}
+		</time>
+	</footer>
+	{% if article.tags %}
+	<div class="tags">
+		{% for tag in article.tags|sort %}
+		<a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>
+		{% endfor %}
+	</div>
+	{% endif %}
+	{% if article.related_posts %}
+	<div class="related-posts">                                                                                                                                                   
+		<h3>Related posts</h3>
+		<ul id="related-posts">
+			{% for related_post in article.related_posts %}
+			<li><a href="{{ SITEURL }}/{{ related_post.url }}">{{ related_post.title }}</a></li>                                                                                      
+			{% endfor %}
+		</ul>
+	</div>
+	{% endif %}
+	<ul id="next-prev-links">
+		{% if article.next_article %}
+		<li id="next-link">
+			<a href="{{ SITEURL }}/{{ article.next_article.url}}">
+			&laquo; {{ article.next_article.title }}
+			</a>
+		</li>
+		{% endif %}
+		{% if article.prev_article %}
+		<li id="prev-link">
+			<a href="{{ SITEURL }}/{{ article.prev_article.url}}">
+			{{ article.prev_article.title }} &raquo;
+			</a>
+		</li>
+		{% endif %}
+	</ul>
+</main>
+{% endblock %}

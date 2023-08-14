@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}{{ period | reverse | join(' ') }} archives &ndash; {{ SITENAME }}{% endblock %}
+
+{% block content %}
+<main id="content">
+	<h2>Archives for {{ period | reverse | join(' ') }}</h2>
+
+	{% include 'partial/archive-view.html' %}
+
+</main>
+{% endblock %}

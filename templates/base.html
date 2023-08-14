@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="{% block html_lang %}{{ DEFAULT_LANG }}{% endblock html_lang %}">
+<head>
+        {% block head %}
+        <link rel="stylesheet" href="/{{ THEME_STATIC_DIR }}/css/style.css" />
+        <link rel="stylesheet" href="/{{ THEME_STATIC_DIR }}/css/fonts.css" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>{% block title %}{{ SITENAME }} &ndash; {{ SITETITLE }}{% endblock title %}</title>
+        <meta charset="utf-8" />
+        {% if FEED_ALL_ATOM %}
+        <link href="{{ FEED_DOMAIN }}/{% if FEED_ALL_ATOM_URL %}{{ FEED_ALL_ATOM_URL }}{% else %}{{ FEED_ALL_ATOM }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Full Atom Feed" />
+        {% endif %}
+        {% if FEED_ALL_RSS %}
+        <link href="{{ FEED_DOMAIN }}/{% if FEED_ALL_RSS_URL %}{{ FEED_ALL_RSS_URL }}{% else %}{{ FEED_ALL_RSS }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Full RSS Feed" />
+        {% endif %}
+        {% if FEED_ATOM %}
+        <link href="{{ FEED_DOMAIN }}/{%if FEED_ATOM_URL %}{{ FEED_ATOM_URL }}{% else %}{{ FEED_ATOM }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" />
+        {% endif %}
+        {% if FEED_RSS %}
+        <link href="{{ FEED_DOMAIN }}/{% if FEED_RSS_URL %}{{ FEED_RSS_URL }}{% else %}{{ FEED_RSS }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
+        {% endif %}
+
+        {% if article %}
+        {% for tag in article.ogtags %}
+        <meta property="{{tag[0]}}" content="{{tag[1]|striptags|e}}" />
+        {% endfor %}
+        <meta name="keywords" content="{{ SITENAME }} {{ article.title|striptags }} {% for tag in article.tags %} {{ tag }}{% endfor %}" />
+        {% endif %}
+
+        {% if page  %}
+        {% for tag in page.ogtags %}
+        <meta property="{{tag[0]}}" content="{{tag[1]|striptags|e}}" />
+        {% endfor %}
+        <meta name="keywords" content="{{ SITENAME }} {{ page.title|striptags }}" />
+        {% endif %}
+        <meta property="og:image" content="{{ SITEURL }}/files/images/hrw-512.jpg" />
+
+        {% if not article and not page %}
+        <meta name="description" content="{{ SITEDESCRIPTION |striptags}}" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="{{ SITENAME }}" />
+        <meta property="og:description" content="{{ SITEDESCRIPTION |striptags}}" />
+        <meta property="og:site_name" content="{{ SITENAME }}" />
+        <meta property="og:url" content="{{ SITEURL }}" />
+        {% endif %}
+
+        {% endblock head %}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#2e8233"/>
+        <link rel="apple-touch-icon" sizes="192x192" href="/files/images/hrw-192.jpg">
+        <link rel="icon" href="/files/images/hrw-192.jpg">
+        <link rel="me" href="https://society.oftrolls.com/@hrw">
+        <script>
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(err) {
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+
+        </script>
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="{{ SITEURL }}/">{{ SITENAME }}</a></h1>
+                <p>{{ SITETITLE }}</p>
+        </header>
+        <nav id="menu"><ul>
+        {% if DISPLAY_PAGES_ON_MENU %}
+          {% for p in pages %}
+            <li{% if p == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+          {% endfor %}
+        {% endif %}
+        {% for title, link in MENUITEMS %}
+            <li><a href="{{ link }}">{{ title }}</a></li>
+        {% endfor %}
+        </ul></nav>
+
+        {% block content %}
+        {% endblock %}
+        
+        {% block sidebar %}
+        <aside id="sidebar">
+                <h2>About me</h2>
+                <p>
+                I work at Red Hat. And I am full time assignee at Linaro.
+                Mostly working on AArch64 support in several projects.
+                </p>
+
+                <p>
+                I am also known as 'hrw' (<a href="/2007/04/26/how-to-pronounce-haerwu/">/hʌ eə vʊ/</a>).
+                </p>
+
+		<h2>Search</h2>
+		<div id="search"></div>
+
+                <h2>Privacy policy</h2>
+                <p>This website does not use cookies. Server logs contain IP
+                   address and user agent info. You can leave if you disagree.</p>
+                <p><a href="/2018/05/24/gdpr/">GDPR information</a> if you want to read such policies.</p>
+
+                <h2>Useful tables</h2>
+
+                <ul>
+                        <li>
+                                <a href="/download/tables/bsa-sbsa.html">BSA and
+                                        SBSA checklists</a>
+                        </li>
+                        <li>
+                                <a href="/download/tables/syscalls.html">Linux kernel
+                                        system calls for all architectures</a>
+                        </li>
+                        <li>
+                                <a href="/download/tables/arm-socs.html">AArch64 SoC features</a>
+                        </li>
+                        <li>
+                                <a href="/download/tables/arm-cpu-cores.html">AArch64 cpu core information</a>
+                        </li>
+                        <li>
+                                <a href="/download/tables/fosdem/">FOSDEM videos</a>
+                        </li>
+                </ul>
+
+                <h2>Recent posts</h2>
+                {% set recent = articles if not all_articles else all_articles %}
+                <ul>
+                        {% for a in recent %}
+                        {% if loop.index <= 16 %}
+                        <li>
+                                <a href="{{ SITEURL }}/{{ a.url }}">{{ a.title }}</a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                </ul>
+        </aside>
+        {% endblock %}
+        
+        {% block footer %}
+        <footer id="site-footer">
+                <p>
+                        Copyright by Marcin Juszkiewicz. Licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>.
+                </p>
+        </footer>
+        {% endblock %}
+	<link  href="/_pagefind/pagefind-ui.css" rel="stylesheet">
+	<script src="/_pagefind/pagefind-ui.js" type="text/javascript"></script>
+	<script>
+		window.addEventListener('DOMContentLoaded', (event) => {
+			new PagefindUI({
+				element: "#search",
+				showImages: false,
+			});
+		});
+	</script>
+</body>
+</html>

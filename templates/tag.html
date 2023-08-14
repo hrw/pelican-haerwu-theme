@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}{{ tag }} tag &ndash; {{ SITENAME }}{% endblock %}
+
+{% block content %}
+<main id="content">
+    <h2>{{ articles|length }} article{% if articles|length > 1 %}s{% endif %} tagged {{ tag }}</h2>
+
+{% include 'partial/archive-view.html' %}
+
+</main>
+{% endblock content %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<main id="content">
+	<ol id="post-list">
+		{% for article in articles_page.object_list %}
+		<li><article class="hentry">
+				<header>
+					<h2 class="entry-title">
+						<a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a>
+					</h2> 
+				</header>
+				<div class="entry-content"> {{ article.content }} </div>
+				<footer class="post-info">
+					Written by {{ article.author }} on 
+					<time class="published" datetime="{{ article.date.isoformat() }}">
+						{%- set d = article.date | strftime("%-d") %}
+						{% if d in ["1", "21", "31"] %}
+						{{ d }}st
+						{% elif d in ["2", "22"] %}
+						{{ d }}nd
+						{% elif d in ["3", "23"] %}
+						{{ d }}rd
+						{% else %}
+						{{ d }}th
+						{% endif -%}
+						{{ article.date|strftime("%B %Y") }}
+					</time>
+				</footer>
+			</article></li>
+			{% endfor %}
+	</ol>
+	{% if articles_page.has_other_pages() %}
+	{% include 'pagination.html' %}
+	{% endif %}
+</main>
+{% endblock content %}

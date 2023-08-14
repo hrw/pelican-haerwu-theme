@@ -1,0 +1,15 @@
+<dl>
+{% for year, date_year in dates|groupby( 'date.year' )|sort(reverse=True) %}
+        {% for month, articles in date_year|groupby('date.month')|sort(reverse=True) %}
+                {% for article in articles %}
+
+                        {% if loop.first %}
+                                <dt>{{ article.date|strftime('%B %Y') }}</dt>
+                        {% endif %}
+
+                        <dd>{{ article.date.day }}. <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></dd>
+
+                {% endfor %}
+        {% endfor %}
+{% endfor %}
+</dl>
