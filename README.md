@@ -36,3 +36,4 @@ Current options:
 - THEME_SIDEBAR_ABOUT - HTML (needs to have &lt;p&gt; block) for "About me" part in sidebar (optional)
 - THEME_SIDEBAR_LINKS - dict of links for sidebar section (optional)
 - THEME_FOOTER - HTML for message in the footer (optional)
+- THEME_MASTODON_LINK - URL to Mastodon/Fediverse profile
