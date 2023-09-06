@@ -99,28 +99,15 @@ if ('serviceWorker' in navigator) {
                    address and user agent info. You can leave if you disagree.</p>
                 <p><a href="/2018/05/24/gdpr/">GDPR information</a> if you want to read such policies.</p>
 
-                <h2>Useful tables</h2>
-
-                <ul>
-                        <li>
-                                <a href="/download/tables/bsa-sbsa.html">BSA and
-                                        SBSA checklists</a>
-                        </li>
-                        <li>
-                                <a href="/download/tables/syscalls.html">Linux kernel
-                                        system calls for all architectures</a>
-                        </li>
-                        <li>
-                                <a href="/download/tables/arm-socs.html">AArch64 SoC features</a>
-                        </li>
-                        <li>
-                                <a href="/download/tables/arm-cpu-cores.html">AArch64 cpu core information</a>
-                        </li>
-                        <li>
-                                <a href="/download/tables/fosdem/">FOSDEM videos</a>
-                        </li>
-                </ul>
-
+{% if THEME_SIDEBAR_LINKS %}
+<h2>{{ THEME_SIDEBAR_LINKS.title }}</h2>
+<ul>
+	{% for link in THEME_SIDEBAR_LINKS.links %}
+	<li>
+		<a href="{{ THEME_SIDEBAR_LINKS.links[link] }}">{{ link }}</a>
+	{% endfor %}
+</ul>
+{% endif %}
                 <h2>Recent posts</h2>
                 {% set recent = articles if not all_articles else all_articles %}
                 <ul>
