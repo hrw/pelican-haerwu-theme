@@ -86,15 +86,10 @@ if ('serviceWorker' in navigator) {
         
         {% block sidebar %}
         <aside id="sidebar">
+		{% if THEME_SIDEBAR_ABOUT %}
                 <h2>About me</h2>
-                <p>
-                I work at Red Hat. And I am full time assignee at Linaro.
-                Mostly working on AArch64 support in several projects.
-                </p>
-
-                <p>
-                I am also known as 'hrw' (<a href="/2007/04/26/how-to-pronounce-haerwu/">/hʌ eə vʊ/</a>).
-                </p>
+		{{ THEME_SIDEBAR_ABOUT }}
+		{% endif %}
 
 		<h2>Search</h2>
 		<div id="search"></div>
