@@ -9,7 +9,12 @@
 						<a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a>
 					</h2> 
 				</header>
+				{% if THEME_USE_READ_MORE %}
+				<div class="entry-content"> {{ article.content | read_more(article.url) }} </div>
+				{% else %}
 				<div class="entry-content"> {{ article.content }} </div>
+				{% endif %}
+				{% if THEME_INDEX_SHOW_ARTICLE_FOOTER %}
 				<footer class="post-info">
 					Written by {{ article.author }} on 
 					<time class="published" datetime="{{ article.date.isoformat() }}">
@@ -26,6 +31,7 @@
 						{{ article.date|strftime("%B %Y") }}
 					</time>
 				</footer>
+				{% endif %}
 			</article></li>
 			{% endfor %}
 	</ol>

@@ -20,6 +20,7 @@ blog](https://marcin.juszkiewicz.com.pl/).
 There is support for several plugins:
 
 - neighbors
+- read_more (not published yet)
 - related_posts
 - series
 
@@ -37,3 +38,5 @@ Current options:
 - THEME_SIDEBAR_LINKS - dict of links for sidebar section (optional)
 - THEME_FOOTER - HTML for message in the footer (optional)
 - THEME_MASTODON_LINK - URL to Mastodon/Fediverse profile
+- THEME_USE_READ_MORE - enable short entries on main page
+- THEME_INDEX_SHOW_ARTICLE_FOOTER - enable author/date footer on main page
