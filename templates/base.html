@@ -33,7 +33,7 @@
         {% endfor %}
         <meta name="keywords" content="{{ SITENAME }} {{ page.title|striptags }}" />
         {% endif %}
-        <meta property="og:image" content="{{ SITEURL }}/files/images/hrw-512.jpg" />
+        <meta property="og:image" content="{{ SITEURL }}{{ THEME_THUMBNAIL }}" />
 
         {% if not article and not page %}
         <meta name="description" content="{{ SITEDESCRIPTION |striptags}}" />
@@ -47,8 +47,8 @@
         {% endblock head %}
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#2e8233"/>
-        <link rel="apple-touch-icon" sizes="192x192" href="/files/images/hrw-192.jpg">
-        <link rel="icon" href="/files/images/hrw-192.jpg">
+        <link rel="apple-touch-icon" sizes="192x192" href="{{ THEME_THUMBNAIL_192 }}">
+        <link rel="icon" href="{{ THEME_THUMBNAIL_192 }}">
         <link rel="me" href="https://society.oftrolls.com/@hrw">
         <script>
 
