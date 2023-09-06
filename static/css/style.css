@@ -270,3 +270,11 @@ mark {
 	background-color: white !important;
 	font-weight: bold !important;
 }
+
+.readmore {
+	text-align: right;
+}
+
+.readmore a {
+	font-weight: bold;
+}
