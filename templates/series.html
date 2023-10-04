@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}blog series &ndash; {{ SITENAME }}{% endblock %}
+
+{% block content %}
+<main id="content">
+<h2>Series</h2>
+
+<dl>
+{% for series_name, series_articles in series.items() %}
+{% set article = series_articles[0] %}
+<dt>{{ series_name }}</dt>
+
+{% for article in series_articles %}
+<dd><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></dd>
+{% endfor %}
+
+{% endfor %}
+</dl>
+
+</main>
+{% endblock content %}
