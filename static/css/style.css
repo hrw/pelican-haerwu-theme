@@ -278,3 +278,12 @@ mark {
 .readmore a {
 	font-weight: bold;
 }
+
+td {
+	vertical-align: top;
+	padding: 0.25em;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
