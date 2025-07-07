@@ -1,7 +1,19 @@
+html {
+	color-scheme: light dark;
+}
+
+html:has(#colour-scheme [value="light"]:checked){
+  color-scheme: light;
+}
+
+html:has(#colour-scheme [value="dark"]:checked){
+  color-scheme: dark;
+}
+
 body {
 	font: 1em Fira Sans, sans-serif;
-	background-color: #fff;
-	color: #000;
+	background-color: light-dark(#fff, #181818);
+	color: light-dark(#181818, #fff);
 	text-align: justify;
 	line-height: 1.5em;
 	margin: 0 auto;
@@ -123,7 +135,7 @@ a:visited {
 }
 
 #banner > h1 > a {
-	color: #000;
+	color: light-dark(#181818, #fff);
 }
 
 h2 {
@@ -153,8 +165,8 @@ figure {
 }
 
 pre {
-	background-color: #fff;
 	margin-bottom: 20px;
+	background-color: light-dark(#fff, #181818);
 	overflow: auto;
 	padding: 20px;
 	border: 1px solid #EAEAEA;
@@ -181,7 +193,7 @@ img {
 .tags a {
 	border: 1px solid #eaeaea;
 	padding: 0.15em;
-	color: #000;
+	color: light-dark(#181818, #fff);
 }
 
 dt {
@@ -225,7 +237,7 @@ article.hentry {
 
 }
 .entry-content > table >thead {
-	background-color: #eee;
+	background-color: light-dark(#eee, #222);
 }
 
 .entry-content li p {
@@ -285,5 +297,5 @@ td {
 }
 
 tr:nth-child(even) {
-	background-color: #f2f2f2;
+	background-color: light-dark(#f2f2f2, #2f2f2f);
 }

@@ -91,6 +91,20 @@ if ('serviceWorker' in navigator) {
 		{{ THEME_SIDEBAR_ABOUT }}
 		{% endif %}
 
+                <h2>Colour scheme</h2>
+
+
+<fieldset id="colour-scheme">
+  <legend>Select a colour mode:</legend>
+    <input type="radio" id="auto" name="mode" value="auto" checked />
+    <label for="auto">Auto</label>
+    <input type="radio" id="light" name="mode" value="light" />
+    <label for="light">Light</label>
+    <input type="radio" id="dark" name="mode" value="dark" />
+    <label for="dark">Dark</label>
+</fieldset>
+
+                
 		<h2>Search</h2>
 		<div id="search"></div>
 
