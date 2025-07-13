@@ -61,6 +61,16 @@
 		{% endfor %}
 	</div>
 	{% endif %}
+
+	<dev class="mastodon">
+	{% if article.mastodon %}
+		<h3>Comments?</h3>
+		<p>
+			If you want to comment, head over to <a href="{{ article.mastodon }}">my post on Mastodon</a>.
+		</p>
+	{% endif %}
+	</div>
+
 	{% if article.related_posts %}
 	<div class="related-posts">                                                                                                                                                   
 		<h3>Related posts</h3>
